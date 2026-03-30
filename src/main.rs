@@ -134,6 +134,17 @@ fn rw_ptr_ptr_copy() {
     println!("{:?}", arr2);
 }
 
+fn rw_ptr_math() {
+    let mut a = 5;
+    let ptr = &mut a as *mut i32;
+
+    unsafe {
+        *ptr += 4;
+    }
+
+    println!("{:?}", a);
+}
+
 fn main() {
-    rw_ptr_ptr_copy();
+    rw_ptr_math();
 }
