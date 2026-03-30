@@ -109,11 +109,21 @@ fn rw_ptr_ptr_read() {
     let ptr = &x as *const i32;
 
     unsafe {
-        let val = std::ptr::read(ptr);
+        let val = std::ptr::read(ptr); //copy bytes out of that address into a new owned value
         println!("{}", val);
     }
 }
 
+fn rw_ptr_ptr_write() {
+    let mut x = 12;
+    let ptr = &mut x as *mut i32;
+
+    unsafe {
+        std::ptr::write(ptr, 20); //place this value directly into that memory address
+    }
+    println!("{}", x);
+}
+
 fn main() {
-    rw_ptr_ptr_read();
+    rw_ptr_ptr_write();
 }
