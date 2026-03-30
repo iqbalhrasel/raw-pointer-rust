@@ -1,4 +1,4 @@
-use std::ptr::null;
+use std::ptr::{null, null_mut};
 
 fn rw_ptr_const() {
     let x = 10;
@@ -89,6 +89,31 @@ fn rw_ptr_dangling_ptr() {
     }
 }
 
+// raw pointer in struct
+struct Node {
+    val: i32,
+    next: *mut Node,
+}
+impl Node {
+    fn new() -> Self {
+        return Self {
+            val: 10,
+            next: null_mut(), //std::ptr::null_mut()
+        };
+    }
+}
+// raw pointer in struct
+
+fn rw_ptr_ptr_read() {
+    let x = 12;
+    let ptr = &x as *const i32;
+
+    unsafe {
+        let val = std::ptr::read(ptr);
+        println!("{}", val);
+    }
+}
+
 fn main() {
-    rw_ptr_dangling_ptr();
+    rw_ptr_ptr_read();
 }
