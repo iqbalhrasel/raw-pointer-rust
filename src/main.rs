@@ -124,6 +124,16 @@ fn rw_ptr_ptr_write() {
     println!("{}", x);
 }
 
+fn rw_ptr_ptr_copy() {
+    let arr1 = [10, 20, 30];
+    let mut arr2 = [0; 3];
+
+    unsafe {
+        std::ptr::copy(arr1.as_ptr(), arr2.as_mut_ptr(), 3); //It copies bytes element-by-element
+    }
+    println!("{:?}", arr2);
+}
+
 fn main() {
-    rw_ptr_ptr_write();
+    rw_ptr_ptr_copy();
 }
