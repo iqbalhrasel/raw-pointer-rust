@@ -3,6 +3,7 @@ use std::{
     ptr::{self, null_mut},
 };
 
+#[derive(Debug)]
 pub struct MiniVec {
     ptr: *mut i32,
     len: usize,
@@ -49,5 +50,13 @@ impl MiniVec {
         self.len += 1;
     }
 
-    pub fn get() {}
+    pub fn get(&self, index: usize) -> Option<i32> {
+        if index >= self.len {
+            return None;
+        }
+
+        unsafe {
+            return Some(*self.ptr.add(index));
+        }
+    }
 }

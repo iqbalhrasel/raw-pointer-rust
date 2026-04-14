@@ -9,5 +9,13 @@ mod menual_mem;
 mod mini_vec;
 
 fn main() {
-    let v = MiniVec::new();
+    let mut v = MiniVec::new();
+    v.push(10);
+    v.push(20);
+    v.push(30);
+    v.push(40);
+
+    println!("{:?}", v.get(2));
+
+    println!("{:?}", v);
 }
