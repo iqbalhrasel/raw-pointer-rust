@@ -78,3 +78,21 @@ impl LinkedList {
         None
     }
 }
+
+impl Drop for LinkedList {
+    fn drop(&mut self) {
+        let mut curr = self.head;
+
+        while !curr.is_null() {
+            unsafe {
+                let next = (*self.head).next;
+                Box::from_raw(curr);
+                curr = next;
+            }
+        }
+
+        self.head = ptr::null_mut();
+        self.tail = ptr::null_mut();
+        self.count = 0;
+    }
+}
