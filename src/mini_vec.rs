@@ -60,3 +60,17 @@ impl MiniVec {
         }
     }
 }
+
+impl Drop for MiniVec {
+    fn drop(&mut self) {
+        if self.ptr.is_null() {
+            return;
+        }
+
+        unsafe {
+            //Without the type array::<i32>, Rust cannot know element size
+            let layout = Layout::array::<i32>(self.cap).unwrap();
+            dealloc(self.ptr as *mut u8, layout);
+        }
+    }
+}
