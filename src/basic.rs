@@ -102,6 +102,24 @@ impl Node {
         };
     }
 }
+
+pub fn node_rw() {
+    let mut node = Node {
+        val: 21,
+        next: null_mut(),
+    };
+
+    let ptr = &node as *const Node;
+    unsafe {
+        println!("{}", (*ptr).val);
+    }
+
+    let ptr2 = &mut node as *mut Node;
+    unsafe {
+        (*ptr2).val = 31;
+        println!("{}", (*ptr2).val);
+    }
+}
 // raw pointer in struct
 
 pub fn rw_ptr_ptr_read() {
@@ -143,4 +161,13 @@ pub fn rw_ptr_math() {
     }
 
     println!("{:?}", a);
+}
+
+pub fn rw_slice() {
+    let arr = [10, 20, 30];
+    let ptr = arr.as_ptr();
+
+    let slice = unsafe { std::slice::from_raw_parts(ptr, 2) };
+
+    println!("{:?}", slice);
 }

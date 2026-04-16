@@ -1,5 +1,5 @@
 use crate::{
-    basic::rw_ptr_math,
+    basic::{node_rw, rw_ptr_math, rw_slice},
     menual_mem::{men_mem, raw_slice, struct_mem},
     mini_linkedlst::LinkedList,
     mini_vec::MiniVec,
@@ -11,11 +11,5 @@ mod mini_linkedlst;
 mod mini_vec;
 
 fn main() {
-    let mut list = LinkedList::new();
-    list.add_last(10);
-    list.add_last(20);
-    list.add_last(30);
-    list.add_first(5);
-
-    println!("{:?}", list.get(39));
+    rw_slice();
 }
